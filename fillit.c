@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/18 05:29:19 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/18 05:41:26 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int		main(int argc, char **argv)
 	while (i < 26)
 	{
 		tetriminos[i].x = 9;
-
+		i++;
 	}
 }
