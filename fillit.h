@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:36:05 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/21 16:39:38 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/22 05:17:49 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 
 typedef struct	s_tetrimino
 {
-	char	*pos;
 	int		x;
 	int		y;
+	int		width;
+	int		height;
 }				t_tetrimino;
 
 int			ft_isok(char *str);
