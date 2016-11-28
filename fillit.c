@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/25 22:33:52 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:16:16 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	find_origin(char (*tetri)[4][5], t_tetrimino *tetrimino)
 	x = 0;
 	tetrimino->x = -1;
 	tetrimino->y = -1;
-	tetrimino->add = *tetri;
+	tetrimino->add = tetri;
 	while (x < 4)
 	{
 		y = 0;
@@ -46,7 +46,6 @@ int		count_check_tetri(char	*buff, int size_buff)
 	t_tetrimino		tetriminos[26];
 	int				i;
 	int				max_count;
-	char			grid[16][16];
 
 	max_count = size_buff / 21;
 	if (size_buff % 21 != 0 && max_count != 0)
@@ -61,6 +60,7 @@ int		count_check_tetri(char	*buff, int size_buff)
 		find_origin((char (*)[4][5])(*buffer)[i], &tetriminos[i]);
 		i++;
 	}
+	compute_grid_size(buffer, tetriminos, max_count);
 	return (max_count);
 }
 

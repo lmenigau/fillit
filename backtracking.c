@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/28 10:11:13 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:24:50 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		is_fit(t_data data, int index, int x, int y)
 	int		i;
 	int		j;
 
-	i = data.tetri[index]->x;
+	i = data.tetri[index].x;
 
 	while (i <= data.tetri[index].width)
 	{
-		j = data.tetri[index]->y;
+		j = data.tetri[index].y;
 		while (j <= data.tetri[index].height)
 		{
 			if (data.grid[x][y] != '#' && data.tetri[index].add[i][j] != '#')
@@ -40,9 +40,9 @@ int		blit(t_data data, int index, int x, int y)
 
 	i = data.tetri[index]->x;
 
-	while (i <= data.*tetri[index].width)
+	while (i <= data.tetri[index].width)
 	{
-		j = data.tetri[index]->y;
+		j = data.tetri[index].y;
 		while (j <= data.tetri[index].height)
 		{
 			if (data.tetri[index].add[i][j] == '#')
@@ -52,7 +52,27 @@ int		blit(t_data data, int index, int x, int y)
 		i++;
 	}
 	return (1);
+}
 
+int		remove(t_data data, int index, int x, int y)
+{
+	int		i;
+	int		j;
+
+	i = data.tetri[index]->x;
+
+	while (i <= data.*tetri[index].width)
+	{
+		j = data.tetri[index]->y;
+		while (j <= data.tetri[index].height)
+		{
+			if (data.tetri[index].add[i][j] == '#')
+				grid[x][y] = '.';
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 int		backtracking(t_data data, int index)
@@ -76,7 +96,7 @@ int		backtracking(t_data data, int index)
 		}
 		x++;
 	}
-
+	return (0);
 }
 
 void	compute_grid_size(char **buff, t_tetrimino (*)tetri[], int	max_count)

@@ -15,7 +15,7 @@ NAME 	= libft.a
 CFLAGS	= -Wall -Wextra -Werror
 
 $(NAME)	:	$(OBJ)
-			$(AR) rcs $(NAME) $(OBJ)
+			$(AR) rcs $(NAME) $?
 
 all		:	$(NAME)
 
