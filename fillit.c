@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/22 08:42:17 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/25 22:33:52 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	find_origin(char (*tetri)[4][5], t_tetrimino *tetrimino)
 	x = 0;
 	tetrimino->x = -1;
 	tetrimino->y = -1;
+	tetrimino->add = *tetri;
 	while (x < 4)
 	{
 		y = 0;
