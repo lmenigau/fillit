@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/28 18:24:50 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:02:10 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		blit(t_data data, int index, int x, int y)
 	int		i;
 	int		j;
 
-	i = data.tetri[index]->x;
+	i = data.tetri[index].x;
 
 	while (i <= data.tetri[index].width)
 	{
@@ -46,7 +46,7 @@ int		blit(t_data data, int index, int x, int y)
 		while (j <= data.tetri[index].height)
 		{
 			if (data.tetri[index].add[i][j] == '#')
-				grid[x][y] = '#';
+				data.grid[x][y] = '#';
 			j++;
 		}
 		i++;
@@ -54,23 +54,43 @@ int		blit(t_data data, int index, int x, int y)
 	return (1);
 }
 
-int		remove(t_data data, int index, int x, int y)
+int		t_remove(t_data data, int index, int x, int y)
 {
 	int		i;
 	int		j;
 
-	i = data.tetri[index]->x;
+	i = data.tetri[index].x;
 
-	while (i <= data.*tetri[index].width)
+	while (i <= data.tetri[index].width)
 	{
-		j = data.tetri[index]->y;
+		j = data.tetri[index].y;
 		while (j <= data.tetri[index].height)
 		{
 			if (data.tetri[index].add[i][j] == '#')
-				grid[x][y] = '.';
+				data.grid[x][y] = '.';
 			j++;
 		}
 		i++;
+	}
+	return (1);
+}
+
+int		print_grid(t_data data, int index)
+{
+	int		x;
+	int		y;
+
+	x = 0;
+	if (index >= data.max_count)
+		return (1);
+	while (x < data.size)
+	{
+		y = 0;
+		while (y < data.size)
+		{
+			y++;
+		}
+		x++;
 	}
 	return (1);
 }
@@ -81,6 +101,8 @@ int		backtracking(t_data data, int index)
 	int		y;
 
 	x = 0;
+	if (index >= data.max_count)
+		return (1);
 	while (x < data.size)
 	{
 		y = 0;
@@ -89,17 +111,17 @@ int		backtracking(t_data data, int index)
 			if (is_fit(data, index, x, y))
 			{
 				blit(data, index, x, y);
-				if (backtracking(data, index + 1) == 0)
-					remove(data, index, x, y);
+				if (backtracking(data, index + 1))
+					t_remove(data, index, x, y);
 			}
 			y++;
 		}
 		x++;
 	}
-	return (0);
+	return (1);
 }
 
-void	compute_grid_size(char **buff, t_tetrimino (*)tetri[], int	max_count)
+void	compute_grid_size(char (*buff)[21], t_tetrimino *tetri, int	max_count)
 {
 	int		size;
 	char	grid[16][16];
@@ -111,8 +133,8 @@ void	compute_grid_size(char **buff, t_tetrimino (*)tetri[], int	max_count)
 		size++;
 	data.buff = buff;
 	data.tetri = tetri;
-	data.grid = &grid;
+	data.grid = grid;
 	data.max_count = max_count;
 	data.size = size;
-	backtracking(data);
+	backtracking(data, 0);
 }

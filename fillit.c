@@ -6,13 +6,13 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/28 18:16:16 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:19:49 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	find_origin(char (*tetri)[4][5], t_tetrimino *tetrimino)
+void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino)
 {
 	int		x;
 	int		y;
@@ -26,13 +26,13 @@ void	find_origin(char (*tetri)[4][5], t_tetrimino *tetrimino)
 		y = 0;
 		while (y < 4)
 		{
-			if ((*tetri)[x][y] == '#' && tetrimino->y == -1)
+			if (tetri[x][y] == '#' && tetrimino->y == -1)
 				tetrimino->y = y;
-			if ((*tetri)[x][y] == '#')
+			if (tetri[x][y] == '#')
 				tetrimino->width = y;
-			if ((*tetri)[y][x] == '#' && tetrimino->x == -1)
+			if (tetri[y][x] == '#' && tetrimino->x == -1)
 				tetrimino->x = y;
-			if ((*tetri)[y][x] == '#')
+			if (tetri[y][x] == '#')
 				tetrimino->height = y;
 			y++;
 		}
@@ -42,7 +42,7 @@ void	find_origin(char (*tetri)[4][5], t_tetrimino *tetrimino)
 
 int		count_check_tetri(char	*buff, int size_buff)
 {
-	char			(*buffer)[26][21];
+	char			(*buffer)[21];
 	t_tetrimino		tetriminos[26];
 	int				i;
 	int				max_count;
@@ -50,14 +50,14 @@ int		count_check_tetri(char	*buff, int size_buff)
 	max_count = size_buff / 21;
 	if (size_buff % 21 != 0 && max_count != 0)
 		return (0);
-	buffer	= (char (*)[26][21])buff;
+	buffer	= (char (*)[21])buff;
 	i = 0;
 	while (i < max_count)
 	{
-		printf("%s\n",(char *)(*buffer)[i]);
-		if (!ft_isok((char *)(*buffer)[i]))
+		printf("%s\n",(char *)buffer[i]);
+		if (!ft_isok((char *)buffer[i]))
 			return (0);
-		find_origin((char (*)[4][5])(*buffer)[i], &tetriminos[i]);
+		find_origin((char (*)[5])buffer[i], &tetriminos[i]);
 		i++;
 	}
 	compute_grid_size(buffer, tetriminos, max_count);
