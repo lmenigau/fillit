@@ -6,7 +6,7 @@
 /*   By: recharif <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:53:05 by recharif          #+#    #+#             */
-/*   Updated: 2016/12/01 19:24:12 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 20:23:48 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_is4line(char *str, int index, int max_count)
 		i += 5;
 		j++;
 	}
-	if (str[j] != '\n' && index != max_count)
+	if (str[j] != '\n' && index < max_count)
 		return (0);
 	return (1);
 }
