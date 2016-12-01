@@ -6,7 +6,7 @@
 #*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/18 02:18:30 by lmenigau          #+#    #+#             *#
-#*   Updated: 2016/11/29 18:41:28 by lmenigau         ###   ########.fr       *#
+#*   Updated: 2016/11/30 17:45:11 by lmenigau         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -32,6 +32,7 @@ $(LIB)	:	$(LIBDIR)
 
 clean	:
 			$(RM) $(OBJ)
+			$(MAKE) -C $(LIBDIR) fclean
 
 fclean	:	clean
 			$(RM) $(NAME)

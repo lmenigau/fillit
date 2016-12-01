@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/11/29 21:38:38 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 07:42:58 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, char letter)
 		{
 			if (tetri[x][y] == '#')
 				tetri[x][y] = letter;
-			if (tetri[x][y] != '.' && tetrimino->y == -1)
-				tetrimino->y = y;
+			if (tetri[x][y] != '.' && tetrimino->x == -1)
+				tetrimino->x = x;
 			if (tetri[x][y] != '.')
-				tetrimino->height = y;
-			if (tetri[y][x] != '.' && tetrimino->x == -1)
-				tetrimino->x = y;
+				tetrimino->height = x;
+			if (tetri[y][x] != '.' && tetrimino->y == -1)
+				tetrimino->y = x;
 			if (tetri[y][x] != '.')
-				tetrimino->width = y;
+				tetrimino->width = x;
 			y++;
 		}
 		x++;
@@ -83,5 +83,4 @@ int		main(int argc, char **argv)
 	bytes_read = read(fd, buff, MAX_FILE_SIZE);
 	if (!count_check_tetri(buff, bytes_read))
 		ft_putstr("error.\n");
-
 }
