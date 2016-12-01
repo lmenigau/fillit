@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 11:36:33 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 11:40:40 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int		backtracking(t_data *data, int index, int max_count, int size)
 {
 	int		x;
 	int		y;
+	int		xmax;
+	int		ymax;
 	t_tetrimino *tetri;
 
 	x = 0;
