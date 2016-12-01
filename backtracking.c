@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 19:34:01 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 19:57:12 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,14 @@ void	compute_grid_size(t_tetrimino *tetri, int max_count)
 
 	ft_memset(grid, '.', 16 * 16);
 	size = 2;
-	while (size * size < max_count * 4)
+	while (size * size <= max_count * 4)
 		size++;
 	data.tetri = tetri;
 	data.grid = grid;
 	data.size = size + 1;
 	while (backtracking(&data, 0, max_count, size) == 0)
 	{
-		data.size++;
+		size++;
 	}
 	print_grid(grid, data.size - 1);
 }
