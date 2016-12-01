@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 07:42:58 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 09:35:06 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, char letter)
 	}
 }
 
-int		count_check_tetri(char	*buff, int size_buff)
+int		count_check_tetri(char	(*buffer)[21], int size_buff)
 {
-	char			(*buffer)[21];
 	t_tetrimino		tetriminos[26];
 	int				i;
 	int				max_count;
@@ -50,7 +49,6 @@ int		count_check_tetri(char	*buff, int size_buff)
 	max_count = size_buff / 21;
 	if (size_buff % 21 != 0 && max_count != 0)
 		return (0);
-	buffer	= (char (*)[21])buff;
 	i = 0;
 	while (i < max_count)
 	{
@@ -61,7 +59,7 @@ int		count_check_tetri(char	*buff, int size_buff)
 		find_origin((char (*)[5])buffer[i], &tetriminos[i], i + 'A');
 		i++;
 	}
-	compute_grid_size(buffer, tetriminos, max_count);
+	compute_grid_size(tetriminos, max_count);
 	return (max_count);
 }
 
@@ -69,7 +67,7 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	int		bytes_read;
-	char	buff[MAX_FILE_SIZE];
+	char	buff[26][21];
 
 
 	if (argc != 2)

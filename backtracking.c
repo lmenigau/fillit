@@ -6,27 +6,28 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 07:50:36 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 11:36:33 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		is_fit(t_data data, int index, int x, int y)
+int		is_fit(t_tetrimino *tetri, char (*grid)[16])
 {
 	int		i;
 	int		j;
-	int		ysave;
+	int		x;
+	int		y;
 
-	i = data.tetri[index].x;
-	ysave = y;
-	while (i <= data.tetri[index].height && x < data.size)
+	i = tetri->x;
+	x  = 0;
+	while (i <= tetri->height)
 	{
-		j = data.tetri[index].y;
-		y = ysave;
-		while (j <= data.tetri[index].width && y < data.size)
+		j = tetri->y;
+		y = 0;
+		while (j <= tetri->width)
 		{
-			if (data.grid[x][y] != '.' && data.tetri[index].add[i][j] != '.')
+			if (grid[x][y] != '.' && tetri->add[i][j] != '.')
 				return (0);
 			j++;
 			y++;
@@ -34,52 +35,26 @@ int		is_fit(t_data data, int index, int x, int y)
 		x++;
 		i++;
 	}
-	if (x == data.size || y == data.size)
-		return (0);
 	return (1);
 }
 
-int		blit(t_data data, int index, int x, int y)
+int		blit(t_tetrimino *tetri, char (*grid)[16], char letter)
 {
 	int		i;
 	int		j;
-	int		ysave;
+	int		x;
+	int		y;
 
-	i = data.tetri[index].x;
-	ysave = y;
-	while (i <= data.tetri[index].height)
+	i = tetri->x;
+	x = 0;
+	while (i <= tetri->height)
 	{
-		j = data.tetri[index].y;
-		y = ysave;
-		while (j <= data.tetri[index].width)
+		j = tetri->y;
+		y = 0;
+		while (j <= tetri->width)
 		{
-			if (data.tetri[index].add[i][j] != '.')
-				data.grid[x][y] = 'A' + index;
-			j++;
-			y++;
-		}
-		i++;
-		x++;
-	}
-	return (1);
-}
-
-int		t_remove(t_data data, int index, int x, int y)
-{
-	int		i;
-	int		j;
-	int		ysave;
-
-	i = data.tetri[index].x;
-	ysave = y;
-	while (i <= data.tetri[index].height)
-	{
-		j = data.tetri[index].y;
-		y = ysave;
-		while (j <= data.tetri[index].width)
-		{
-			if (data.tetri[index].add[i][j] != '.')
-				data.grid[x][y] = '.';
+			if (tetri->add[i][j] != '.')
+				grid[x][y] = letter;
 			j++;
 			y++;
 		}
@@ -109,33 +84,27 @@ int		print_grid(char (*grid)[16], int size)
 	return (1);
 }
 
-int		backtracking(t_data data, int index)
+int		backtracking(t_data *data, int index, int max_count, int size)
 {
 	int		x;
 	int		y;
+	t_tetrimino *tetri;
 
 	x = 0;
-	while (x < data.size)
+	if (index == max_count)
+		return (1);
+	tetri = &data->tetri[index];
+	while (x < size - (tetri->height - tetri->x))
 	{
 		y = 0;
-		while (y < data.size)
+		while (y < size - (tetri->width - tetri->y))
 		{
-			printf("%d, %d\n", x, y);
-			if (is_fit(data, index, x, y))
+			if (is_fit(tetri, (char (*)[16])&data->grid[x][y]))
 			{
-				blit(data, index, x, y);
-				printf("%d, %d, %d\n", index, x, y);
-				print_grid(data.grid, data.size);
-				if (index + 1 == data.max_count)
-					return (1);
-				if (backtracking(data, index + 1))
-				{
+				blit(tetri, (char (*)[16])&data->grid[x][y], index + 'A');
+				if (backtracking(data, index + 1, max_count, size))
 					 return (1);
-				}
-				else
-				{
-					t_remove(data, index, x, y);
-				}
+				blit(tetri, (char (*)[16])&data->grid[x][y], '.');
 			}
 			y++;
 		}
@@ -144,7 +113,7 @@ int		backtracking(t_data data, int index)
 	return (0);
 }
 
-void	compute_grid_size(char (*buff)[21], t_tetrimino *tetri, int	max_count)
+void	compute_grid_size(t_tetrimino *tetri, int	max_count)
 {
 	int		size;
 	char	grid[16][16];
@@ -154,15 +123,12 @@ void	compute_grid_size(char (*buff)[21], t_tetrimino *tetri, int	max_count)
 	size = 2;
 	while (size * size < max_count * 4)
 		size++;
-	data.buff = buff;
 	data.tetri = tetri;
 	data.grid = grid;
-	data.max_count = max_count;
 	data.size = size + 1;
-	while (backtracking(data, 0) == 0)
+	while (backtracking(&data, 0, max_count, size) == 0)
 	{
-		printf ("new loop : %d\n", data.size);
 		data.size++;
 	}
-	print_grid(grid, 16);
+	print_grid(grid, data.size - 1);
 }
