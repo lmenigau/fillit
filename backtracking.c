@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 11:50:30 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 19:34:01 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_fit(t_tetrimino *tetri, char (*grid)[16])
 	int		y;
 
 	i = tetri->x;
-	x  = 0;
+	x = 0;
 	while (i <= tetri->height)
 	{
 		j = tetri->y;
@@ -86,8 +86,8 @@ int		print_grid(char (*grid)[16], int size)
 
 int		backtracking(t_data *data, int index, int max_count, int size)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 	t_tetrimino *tetri;
 
 	x = 0;
@@ -103,7 +103,7 @@ int		backtracking(t_data *data, int index, int max_count, int size)
 			{
 				blit(tetri, (char (*)[16])&data->grid[x][y], index + 'A');
 				if (backtracking(data, index + 1, max_count, size))
-					 return (1);
+					return (1);
 				blit(tetri, (char (*)[16])&data->grid[x][y], '.');
 			}
 			y++;
@@ -113,7 +113,7 @@ int		backtracking(t_data *data, int index, int max_count, int size)
 	return (0);
 }
 
-void	compute_grid_size(t_tetrimino *tetri, int	max_count)
+void	compute_grid_size(t_tetrimino *tetri, int max_count)
 {
 	int		size;
 	char	grid[16][16];
