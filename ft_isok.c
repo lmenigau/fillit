@@ -6,7 +6,7 @@
 /*   By: recharif <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:53:05 by recharif          #+#    #+#             */
-/*   Updated: 2016/11/22 02:43:57 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 19:24:12 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_isltr(char *str, int i)
 	return ((str[i] == '.' || str[i] == '#') ? 1 : 0);
 }
 
-static int	ft_is4line(char *str)
+static int	ft_is4line(char *str, int index, int max_count)
 {
 	size_t	i;
 	size_t	j;
@@ -33,7 +33,7 @@ static int	ft_is4line(char *str)
 		i += 5;
 		j++;
 	}
-	if (str[j] != '\n')
+	if (str[j] != '\n' && index != max_count)
 		return (0);
 	return (1);
 }
@@ -56,27 +56,38 @@ static int	ft_is4blocks(char *str)
 	return (1);
 }
 
-static int	ft_istetrimino(char *str)
+static int	ft_istetrimino(char (*str)[5], int connect)
 {
 	int	i;
+	int	j;
 
-	i = 5;
-	while (i < 15)
+	i = 0;
+	while (i < 4)
 	{
-		if (str[i] == '#')
+		j = 0;
+		while (j < 4)
 		{
-			if (!(str[i - 1] == '#' || str[i + 1] == '#' || str[i + 5] == '#'
-				|| str[i - 5] == '#'))
-				return (0);
+			if (j < 3 && str[i][j + 1] == '#' && str[i][j] == '#')
+				connect++;
+			else if (i < 3 && str[i + 1][j] == '#' && str[i][j] == '#')
+				connect++;
+			else if (i > 0 && str[i - 1][j] == '#' && str[i][j] == '#')
+				connect++;
+			else if (j > 0 && str[i][j - 1] == '#' && str[i][j] == '#')
+				connect++;
+			if (connect >= 4)
+				return (1);
+			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-int			ft_isok(char *str)
+int			ft_isok(char *str, int index, int max_count)
 {
-	if (ft_is4line(str) && ft_istetrimino(str) && ft_is4blocks(str))
+	if (ft_is4line(str, index, max_count) && ft_istetrimino((char (*)[5])str,
+				0) && ft_is4blocks(str))
 		return (1);
 	return (0);
 }

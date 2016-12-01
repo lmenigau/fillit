@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 09:35:06 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:32:37 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int		count_check_tetri(char	(*buffer)[21], int size_buff)
 	int				i;
 	int				max_count;
 
-	max_count = size_buff / 21;
-	if (size_buff % 21 != 0 && max_count != 0)
+	max_count = (size_buff + 1) / 21;
+	if ((size_buff + 1) % 21 != 0 && max_count == 0)
 		return (0);
 	i = 0;
 	while (i < max_count)
 	{
-		if (!ft_isok((char *)buffer[i]))
+		if (!ft_isok((char *)buffer[i], i, max_count - 1))
 			return (0);
 		tetriminos[i].x = -1;
 		tetriminos[i].y = -1;
