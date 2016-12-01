@@ -6,13 +6,13 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 20:19:30 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 21:51:05 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, char letter)
+void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, int index)
 {
 	int		x;
 	int		y;
@@ -25,7 +25,7 @@ void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, char letter)
 		while (y < 4)
 		{
 			if (tetri[x][y] == '#')
-				tetri[x][y] = letter;
+				tetri[x][y] = 'A' + index;
 			if (tetri[x][y] != '.' && tetrimino->x == -1)
 				tetrimino->x = x;
 			if (tetri[x][y] != '.')
@@ -52,11 +52,11 @@ int		count_check_tetri(char (*buffer)[21], int size_buff)
 	i = 0;
 	while (i < max_count)
 	{
-		if (!ft_isok((char *)buffer[i], i, max_count - 1))
+		if (!ft_isok(buffer[i], i, max_count - 1))
 			return (0);
 		tetriminos[i].x = -1;
 		tetriminos[i].y = -1;
-		find_origin((char (*)[5])buffer[i], &tetriminos[i], i + 'A');
+		find_origin((char (*)[5])&buffer[i], &tetriminos[i], i);
 		i++;
 	}
 	compute_grid_size(tetriminos, max_count);

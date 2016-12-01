@@ -6,7 +6,7 @@
 /*   By: recharif <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:53:05 by recharif          #+#    #+#             */
-/*   Updated: 2016/12/01 20:23:48 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 21:52:10 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,34 @@ static int	ft_is4blocks(char *str)
 	return (1);
 }
 
-static int	ft_istetrimino(char (*str)[5], int connect)
+static int	ft_istetrimino(char (*str)[5])
 {
 	int	i;
 	int	j;
+	int	 connect;
+	int ilock;
+	int jlock;
 
+	connect = 0;
 	i = 0;
+	ilock = -1;
+	jlock = -1;
 	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			if (j < 3 && str[i][j + 1] == '#' && str[i][j] == '#')
+			if ((str[i][j] == '#') && i != ilock && j != jlock &&
+					((j < 3 && str[i][j + 1] == '#') ||
+					 (i < 3 && str[i + 1][j] == '#') ||
+					 (i > 0 && str[i - 1][j] == '#') ||
+					 (j > 0 && str[i][j - 1] == '#')))
+			{
 				connect++;
-			else if (i < 3 && str[i + 1][j] == '#' && str[i][j] == '#')
-				connect++;
-			else if (i > 0 && str[i - 1][j] == '#' && str[i][j] == '#')
-				connect++;
-			else if (j > 0 && str[i][j - 1] == '#' && str[i][j] == '#')
-				connect++;
-			if (connect >= 4)
+				ilock = i;
+				jlock = j;
+			}
+			if (connect >= 3)
 				return (1);
 			j++;
 		}
@@ -86,8 +94,8 @@ static int	ft_istetrimino(char (*str)[5], int connect)
 
 int			ft_isok(char *str, int index, int max_count)
 {
-	if (ft_is4line(str, index, max_count) && ft_istetrimino((char (*)[5])str,
-				0) && ft_is4blocks(str))
+	if (ft_is4line(str, index, max_count) && ft_is4blocks(str) &&
+			ft_istetrimino((char (*)[5])str))
 		return (1);
 	return (0);
 }
