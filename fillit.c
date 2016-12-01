@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 17:32:37 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/01 19:27:25 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	find_origin(char (*tetri)[5], t_tetrimino *tetrimino, char letter)
 	}
 }
 
-int		count_check_tetri(char	(*buffer)[21], int size_buff)
+int		count_check_tetri(char (*buffer)[21], int size_buff)
 {
 	t_tetrimino		tetriminos[26];
 	int				i;
@@ -69,7 +69,6 @@ int		main(int argc, char **argv)
 	int		bytes_read;
 	char	buff[26][21];
 
-
 	if (argc != 2)
 	{
 		ft_putstr("usage : fillit filename\n");
@@ -77,7 +76,6 @@ int		main(int argc, char **argv)
 	}
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		ft_putstr("error.\n");
-
 	bytes_read = read(fd, buff, MAX_FILE_SIZE);
 	if (!count_check_tetri(buff, bytes_read))
 		ft_putstr("error.\n");
