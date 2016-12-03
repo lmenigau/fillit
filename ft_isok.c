@@ -6,7 +6,7 @@
 /*   By: lmenigau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:53:05 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/03 11:28:42 by xtartens         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:47:07 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static int	ft_is4blocks(char *str)
 	return (1);
 }
 
-static int	ft_istetrimino(char (*str)[5])
+static	int	ft_istetrimino(char (*str)[5])
 {
-	int	i;
-	int	j;
-	int	 connect;
+	int		i;
+	int		j;
+	int		connect;
 
 	connect = 1;
 	i = 0;
@@ -69,9 +69,9 @@ static int	ft_istetrimino(char (*str)[5])
 		j = 0;
 		while (j < 4)
 		{
-			if ((str[i][j] == '#') && ((j < 3 && str[i][j + 1] == '#')))
-					connect++;
-			if ((str[i][j] == '#') && ((i < 3 && str[i + 1][j] == '#')))
+			if (str[i][j] == '#' && j < 3 && str[i][j + 1] == '#')
+				connect++;
+			if (str[i][j] == '#' && i < 3 && str[i + 1][j] == '#')
 				connect++;
 			if (connect >= 4)
 				return (1);
