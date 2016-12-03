@@ -6,7 +6,7 @@
 /*   By: recharif <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:53:05 by recharif          #+#    #+#             */
-/*   Updated: 2016/12/01 21:52:10 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/03 11:23:58 by xtartens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	ft_istetrimino(char (*str)[5])
 {
 	int	i;
 	int	j;
-	int	 connect;
-	int ilock;
-	int jlock;
+	int	connect;
+	int	ilock;
+	int	jlock;
 
 	connect = 0;
 	i = 0;
@@ -74,10 +74,10 @@ static int	ft_istetrimino(char (*str)[5])
 		while (j < 4)
 		{
 			if ((str[i][j] == '#') && i != ilock && j != jlock &&
-					((j < 3 && str[i][j + 1] == '#') ||
-					 (i < 3 && str[i + 1][j] == '#') ||
-					 (i > 0 && str[i - 1][j] == '#') ||
-					 (j > 0 && str[i][j - 1] == '#')))
+				((j < 3 && str[i][j + 1] == '#') ||
+				(i < 3 && str[i + 1][j] == '#') ||
+				(i > 0 && str[i - 1][j] == '#') ||
+				(j > 0 && str[i][j - 1] == '#')))
 			{
 				connect++;
 				ilock = i;
