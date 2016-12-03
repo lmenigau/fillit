@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:53:02 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/01 19:57:12 by lmenigau         ###   ########.fr       */
+/*   Updated: 2016/12/03 13:53:04 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,5 @@ void	compute_grid_size(t_tetrimino *tetri, int max_count)
 	{
 		size++;
 	}
-	print_grid(grid, data.size - 1);
+	print_grid(grid, size);
 }
