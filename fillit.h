@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:36:05 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/03 11:23:22 by xtartens         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:24:48 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct	s_data
 {
 	t_tetrimino	*tetri;
 	char		(*grid)[16];
-	int			size;
 }				t_data;
 
 int				ft_isok(char *str, int index, int max_count);
