@@ -6,12 +6,12 @@
 #*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/18 02:18:30 by lmenigau          #+#    #+#             *#
-#*   Updated: 2016/12/01 16:36:26 by lmenigau         ###   ########.fr       *#
+#*   Updated: 2016/12/14 19:12:34 by lmenigau         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 NAME	= fillit
-SRC		= $(wildcard *.c)
+SRC		= backtracking.c fillit.c ft_isok.c
 OBJ		= $(SRC:.c=.o)
 CFLAGS	= -Wall -Wextra -Werror -Ilibft/
 CFLAGS  += -g
