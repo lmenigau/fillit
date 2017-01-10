@@ -6,7 +6,7 @@
 #*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/18 02:18:30 by lmenigau          #+#    #+#             *#
-#*   Updated: 2016/12/14 19:12:34 by lmenigau         ###   ########.fr       *#
+#*   Updated: 2017/01/10 18:14:37 by lmenigau         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,7 +14,6 @@ NAME	= fillit
 SRC		= backtracking.c fillit.c ft_isok.c
 OBJ		= $(SRC:.c=.o)
 CFLAGS	= -Wall -Wextra -Werror -Ilibft/
-CFLAGS  += -g
 LFLAGS	= -lft
 LDFLAGS	= -Llibft/
 LIBDIR	= libft/

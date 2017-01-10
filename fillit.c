@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 01:09:27 by lmenigau          #+#    #+#             */
-/*   Updated: 2016/12/03 11:17:23 by xtartens         ###   ########.fr       */
+/*   Updated: 2016/12/14 19:16:43 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
+	{
 		ft_putstr("error\n");
+		return (0);
+	}
 	bytes_read = read(fd, buff, MAX_FILE_SIZE);
 	if (!count_check_tetri(buff, bytes_read))
 		ft_putstr("error\n");
